@@ -4,70 +4,54 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from 'next/link';
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import SEOHead from "@/components/seo/SEOHead";
-import { MapPin, Target, Lightbulb, Shield, Zap, Users, Code, Sparkles, Volume2 } from "lucide-react";
+import { MapPin, Target, Lightbulb, Shield, Zap, Users, Code, Sparkles } from "lucide-react";
 import CtaChevrons from "@/components/ui/CtaChevrons";
+import AudioVisualizer from "@/components/hero/AudioVisualizer";
 
 const aboutHero = '/assets/about-hero.jpg';
 
-/* ── Listen button matching hero pill style ── */
+const mitrxyaIcon = '/assets/mitryxa-icon.png';
+
+/* ── Exact same pill as HeroSectionV2 — swapped audio file + page-leave stop ── */
 const AboutListenButton = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const animFrameRef = useRef<number | null>(null);
-  const analyserRef = useRef<AnalyserNode | null>(null);
-  const barsRef = useRef<HTMLSpanElement[]>([]);
-  const BAR_COUNT = 14;
+  const [audioReady, setAudioReady] = useState(false);
 
-  const stopBars = useCallback(() => {
-    if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    barsRef.current.forEach(b => { if (b) b.style.height = "40%"; });
+  // Stop audio when user navigates away
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    };
   }, []);
 
-  const animateBars = useCallback(() => {
-    if (!analyserRef.current) return;
-    const data = new Uint8Array(analyserRef.current.frequencyBinCount);
-    analyserRef.current.getByteFrequencyData(data);
-    const step = Math.floor(data.length / BAR_COUNT);
-    barsRef.current.forEach((bar, i) => {
-      if (!bar) return;
-      const val = data[i * step] / 255;
-      bar.style.height = `${Math.max(15, val * 100)}%`;
-    });
-    animFrameRef.current = requestAnimationFrame(animateBars);
-  }, []);
-
-  const handleClick = useCallback(() => {
+  const toggleAudio = useCallback(() => {
     if (!audioRef.current) {
       const audio = new Audio("/mitryxa-pronunciation.mp3");
-      const ctx = new AudioContext();
-      const src = ctx.createMediaElementSource(audio);
-      const analyser = ctx.createAnalyser();
-      analyser.fftSize = 64;
-      src.connect(analyser);
-      analyser.connect(ctx.destination);
-      analyserRef.current = analyser;
+      audio.crossOrigin = "anonymous";
       audio.onended = () => {
         setIsPlaying(false);
-        stopBars();
-        setTimeout(() => setExpanded(false), 400);
+        setTimeout(() => setExpanded(false), 500);
       };
       audioRef.current = audio;
+      setAudioReady(true);
     }
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
-      stopBars();
       setTimeout(() => setExpanded(false), 300);
     } else {
       setExpanded(true);
       setTimeout(() => {
         audioRef.current?.play();
         setIsPlaying(true);
-        animateBars();
       }, 200);
     }
-  }, [isPlaying, animateBars, stopBars]);
+  }, [isPlaying]);
 
   return (
     <div className="mt-4 flex justify-center">
@@ -75,51 +59,76 @@ const AboutListenButton = () => {
         className="relative rounded-full flex items-center overflow-hidden border border-border/40 backdrop-blur-md bg-background/30"
         style={{
           transition: "width 500ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 400ms ease",
-          width: expanded ? "min(80vw, 280px)" : "140px",
-          height: 40,
-          boxShadow: isPlaying ? "0 0 18px hsl(217 91% 60% / 0.25)" : "0 0 10px hsl(271 81% 56% / 0.08)",
+          width: expanded ? "min(90vw, 360px)" : "160px",
+          height: 44,
+          boxShadow: isPlaying
+            ? "0 0 20px hsla(271, 81%, 56%, 0.25), 0 0 40px hsla(221, 83%, 53%, 0.1)"
+            : "0 0 10px hsla(271, 81%, 56%, 0.08)",
         }}
       >
         <div
           className="absolute inset-0 rounded-full pointer-events-none"
           style={{
-            background: "linear-gradient(135deg, hsla(221,83%,53%,0.15), hsla(271,81%,56%,0.15), hsla(172,66%,50%,0.15))",
-            opacity: 0.4,
+            background: "linear-gradient(135deg, hsla(221, 83%, 53%, 0.15), hsla(271, 81%, 56%, 0.15), hsla(172, 66%, 50%, 0.15))",
+            opacity: isPlaying ? 1 : 0.4,
+            transition: "opacity 400ms ease",
           }}
         />
         <button
-          onClick={handleClick}
-          className="relative z-10 shrink-0 flex items-center gap-2.5 px-4 h-full text-xs font-mono font-semibold tracking-wide text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
+          onClick={toggleAudio}
+          className="relative z-10 shrink-0 flex items-center gap-2.5 px-5 h-full text-xs font-mono font-semibold tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
         >
-          <span className="flex items-center gap-[2px] h-3">
-            {Array.from({ length: 4 }).map((_, i) => (
+          <span className="flex items-center gap-[2px] h-3.5">
+            {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                ref={el => { if (el) barsRef.current[i] = el; }}
                 className="inline-block w-[2px] rounded-full bg-primary"
-                style={{ height: "40%", transition: "height 80ms ease", opacity: isPlaying ? 1 : 0.6 }}
+                style={{
+                  height: isPlaying ? "100%" : "40%",
+                  animation: isPlaying ? `pulse ${0.4 + i * 0.15}s ease-in-out infinite alternate` : "none",
+                  transition: "height 300ms ease",
+                  opacity: isPlaying ? 1 : 0.6,
+                }}
               />
             ))}
           </span>
-          <span>{isPlaying ? "Playing..." : "Listen"}</span>
+          <span>{isPlaying ? "Pause" : "Listen"}</span>
+          <span className="relative ml-1 flex items-center justify-center w-5 h-5">
+            {!isPlaying && (
+              <>
+                <style>{`@keyframes about-energy-ping { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }`}</style>
+                <span
+                  className="absolute inset-0 rounded-full border border-primary/40"
+                  style={{ animation: "about-energy-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite" }}
+                />
+              </>
+            )}
+            <span
+              className="relative z-10 flex items-center justify-center w-5 h-5 rounded-full border border-primary/40 text-primary"
+              style={{ fontSize: 8 }}
+            >
+              {isPlaying ? "❚❚" : "▶"}
+            </span>
+          </span>
         </button>
-        {expanded && (
-          <div className="flex items-center gap-[2px] h-4 px-3 relative z-10 flex-1 justify-center">
-            {Array.from({ length: BAR_COUNT }).map((_, i) => (
-              <span
-                key={i}
-                ref={el => { if (el) barsRef.current[i] = el; }}
-                className="inline-block w-[2px] rounded-full bg-primary"
-                style={{ height: "40%", transition: "height 80ms ease" }}
-              />
-            ))}
-          </div>
-        )}
+        <div
+          className="flex-1 flex items-center justify-center overflow-hidden"
+          style={{
+            opacity: expanded ? 1 : 0,
+            transform: expanded ? "scaleX(1)" : "scaleX(0)",
+            transformOrigin: "left center",
+            transition: "opacity 400ms ease 100ms, transform 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+            paddingRight: expanded ? 12 : 0,
+          }}
+        >
+          {audioReady && (
+            <AudioVisualizer audioElement={audioRef.current} isPlaying={isPlaying} />
+          )}
+        </div>
       </div>
     </div>
   );
 };
-const mitrxyaIcon = '/assets/mitryxa-icon.png';
 
 const nameBreakdown = [
   { fragment: "M", meaning: "Matrix", color: "text-primary" },
