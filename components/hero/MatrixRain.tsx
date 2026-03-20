@@ -16,39 +16,47 @@ const MatrixRain = () => {
     const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEF{}[]<>/=;:";
 
     const colors = [
-      { r: 59, g: 130, b: 246 },  // blue (primary)
-      { r: 139, g: 92, b: 246 },  // purple (secondary)
-      { r: 6, g: 182, b: 212 },   // cyan (accent)
+      { r: 59, g: 130, b: 246 },
+      { r: 139, g: 92, b: 246 },
+      { r: 6, g: 182, b: 212 },
     ];
 
     let columns: number;
     let drops: number[];
     let colorIndices: number[];
-    let lastWidth = canvas.offsetWidth;
+    let lastWidth = -1;
 
-    const resize = () => {
-      const currentWidth = canvas.offsetWidth;
-      const dpr = window.devicePixelRatio;
-      canvas.width = currentWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
+    const init = (w: number, h: number) => {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // Only reinitialize drops when width changes (not height from mobile address bar)
-      if (!columns || currentWidth !== lastWidth) {
-        columns = Math.floor(currentWidth / fontSize);
-        drops = Array.from({ length: columns }, () => Math.random() * -100);
-        colorIndices = Array.from({ length: columns }, () => Math.floor(Math.random() * 3));
-        lastWidth = currentWidth;
-      }
+      columns = Math.floor(w / fontSize);
+      drops = Array.from({ length: columns }, () => Math.random() * -100);
+      colorIndices = Array.from({ length: columns }, () => Math.floor(Math.random() * 3));
+      lastWidth = w;
     };
 
-    resize();
-    window.addEventListener("resize", resize);
+    // Use ResizeObserver so we only reinitialize on actual element size changes
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const w = Math.round(entry.contentRect.width);
+        const h = Math.round(entry.contentRect.height);
+        if (w !== lastWidth && w > 0) {
+          init(w, h);
+        }
+      }
+    });
+
+    ro.observe(canvas);
+    init(canvas.offsetWidth || window.innerWidth, canvas.offsetHeight || window.innerHeight);
 
     const draw = () => {
-      ctx.fillStyle = "rgba(10, 12, 16, 0.06)";
-      ctx.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const w = canvas.width / (window.devicePixelRatio || 1);
+      const h = canvas.height / (window.devicePixelRatio || 1);
 
+      ctx.fillStyle = "rgba(10, 12, 16, 0.06)";
+      ctx.fillRect(0, 0, w, h);
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < columns; i++) {
@@ -56,19 +64,16 @@ const MatrixRain = () => {
         const color = colors[colorIndices[i]];
         const y = drops[i] * fontSize;
 
-        // Bright head character
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.9)`;
         ctx.fillText(char, i * fontSize, y);
 
-        // Slightly dimmer trail
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.4)`;
         ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, y - fontSize);
         ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, 0.15)`;
         ctx.fillText(chars[Math.floor(Math.random() * chars.length)], i * fontSize, y - fontSize * 2);
 
         drops[i]++;
-
-        if (y > canvas.offsetHeight && Math.random() > 0.975) {
+        if (y > h && Math.random() > 0.975) {
           drops[i] = 0;
           colorIndices[i] = Math.floor(Math.random() * 3);
         }
@@ -78,9 +83,10 @@ const MatrixRain = () => {
     };
 
     draw();
+
     return () => {
       cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
+      ro.disconnect();
     };
   }, []);
 

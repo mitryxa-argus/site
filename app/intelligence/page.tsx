@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import SEOHead from "@/components/seo/SEOHead";
-import PersonalizedInsight from "@/components/intelligence/PersonalizedInsight";
 import CtaChevrons from "@/components/ui/CtaChevrons";
 import {
   Radar, MessageSquare, FileText, Filter, BarChart3, Award,
@@ -184,12 +183,7 @@ const Intelligence = () => {
                   <Link href="/argus" className="btn-cta">
                     <span>&gt;_ Schedule a Strategy Session</span> <CtaChevrons />
                   </Link>
-                  <a
-                    href="#personalized"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors"
-                  >
-                    See What It Does For You <ChevronRight size={16} />
-                  </a>
+
                 </div>
               </div>
               <div className="flex-1 w-full max-w-lg lg:max-w-none">
@@ -353,15 +347,37 @@ const Intelligence = () => {
           </div>
         </section>
 
-        {/* ── Personalized Insight ── */}
+        {/* ── Talk to Argus CTA ── */}
         <section id="personalized" className="py-24 scroll-reveal scroll-mt-24">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-secondary mb-3 font-mono">&gt;_ Personalized</p>
-              <h2 className="text-3xl font-bold text-foreground">See What This Means For Your Business</h2>
-              <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Describe your business below and discover exactly how the Digital Intelligence Layer can impact your bottom line.</p>
+            <div
+              className="glass-terminal rounded-2xl p-12 sm:p-16 text-center relative overflow-hidden"
+              style={{ background: "linear-gradient(135deg, hsl(217 91% 60% / 0.08), hsl(263 70% 50% / 0.1), hsl(186 100% 42% / 0.06))" }}
+            >
+              <div className="tilt-gradient-line" />
+              <div className="absolute inset-0 animate-scanline pointer-events-none" />
+              {/* Pulsing orb */}
+              <div className="relative z-10 mx-auto mb-8 w-20 h-20">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 via-secondary/20 to-accent/30 blur-xl animate-pulse" />
+                <div className="relative w-full h-full rounded-full border border-primary/30 bg-background/40 flex items-center justify-center backdrop-blur-sm">
+                  <span className="text-2xl font-bold font-mono text-gradient">&gt;_</span>
+                </div>
+              </div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-secondary mb-4 font-mono relative z-10">&gt;_ Your AI Partner</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground relative z-10">
+                Want to Know What This Means<br className="hidden sm:block" /> for <span className="text-gradient">Your Business?</span>
+              </h2>
+              <p className="text-muted-foreground mt-4 max-w-xl mx-auto relative z-10 leading-relaxed">
+                Skip the guesswork. Talk to Argus directly — describe your business, your market, your goals. Get a real strategic breakdown in minutes, not days.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 relative z-10">
+                <Link href="/argus" className="btn-cta">
+                  <span>&gt;_ Talk to Argus Now</span> <CtaChevrons />
+                </Link>
+              </div>
+              {/* Ambient grid lines */}
+              <div className="absolute inset-0 pointer-events-none opacity-5" style={{backgroundImage:"linear-gradient(hsl(217 91% 60%) 1px, transparent 1px), linear-gradient(90deg, hsl(217 91% 60%) 1px, transparent 1px)", backgroundSize:"40px 40px"}} />
             </div>
-            <PersonalizedInsight />
           </div>
         </section>
 
