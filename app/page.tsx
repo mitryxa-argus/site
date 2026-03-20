@@ -4,12 +4,10 @@ import Link from 'next/link';
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useCountUp } from "@/hooks/useCountUp";
 import HeroSectionV2 from "@/components/hero/HeroSectionV2";
-import ProjectNavigator from "@/components/navigator/ProjectNavigator";
 import SEOHead from "@/components/seo/SEOHead";
 import JsonLd, { organizationSchema } from "@/components/seo/JsonLd";
 import PlatformsCarousel from "@/components/platforms/PlatformsCarousel";
-import { ArrowRight, Users, Cpu, FileCheck, Radar } from "lucide-react";
-import SavingsCalculator from "@/components/calculator/SavingsCalculator";
+import { Radar, MessageSquare } from "lucide-react";
 import CtaChevrons from "@/components/ui/CtaChevrons";
 import NetworkHubViz from "@/components/intelligence/NetworkHubViz";
 
@@ -20,7 +18,7 @@ const stats = [
   { label: "Sales Friction Reduction", value: 60, suffix: "%", prefix: "+", accent: "from-primary to-accent" },
 ];
 
-const StatCard = ({ label, value, suffix, prefix = "", accent }: { label: string; value: number; suffix: string; prefix?: string; accent: string }) => {
+const StatCard = ({ label, value, suffix, prefix = "" }: { label: string; value: number; suffix: string; prefix?: string; accent: string }) => {
   const { count, ref } = useCountUp(value);
   return (
     <div ref={ref as React.RefObject<HTMLDivElement>} className="glass-terminal rounded-xl p-6 text-center relative overflow-hidden">
@@ -31,8 +29,7 @@ const StatCard = ({ label, value, suffix, prefix = "", accent }: { label: string
   );
 };
 
-
-const Index = () => {
+export default function Home() {
   const sectionRef = useScrollReveal<HTMLDivElement>();
 
   return (
@@ -47,7 +44,7 @@ const Index = () => {
       <HeroSectionV2 />
 
       <div ref={sectionRef}>
-        {/* AI Decision Platforms */}
+        {/* AI Decision Platforms Carousel */}
         <section className="py-24 scroll-reveal">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-center mb-8">
@@ -66,13 +63,11 @@ const Index = () => {
               <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-secondary via-accent to-primary" />
               <div className="absolute inset-0 animate-scanline pointer-events-none" />
               <div className="flex flex-col lg:flex-row items-center gap-0">
-                {/* Viz side */}
                 <div className="w-full lg:w-[340px] h-[240px] lg:h-[280px] shrink-0 relative">
                   <NetworkHubViz />
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/80 hidden lg:block pointer-events-none" />
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 lg:hidden pointer-events-none" />
                 </div>
-                {/* Content side */}
                 <div className="flex-1 p-8 lg:p-10 relative z-10">
                   <div className="flex items-center gap-2 mb-3">
                     <Radar size={14} className="text-secondary" />
@@ -82,7 +77,7 @@ const Index = () => {
                   <p className="text-muted-foreground mt-3 max-w-lg text-sm leading-relaxed">
                     Discover opportunities across the internet, handle inquiries instantly, and convert digital attention into revenue — all powered by operational intelligence.
                   </p>
-                  <Link href="/intelligence" className="btn-cta mt-6">
+                  <Link href="/intelligence" className="btn-cta mt-6 inline-flex">
                     <span>&gt;_ Explore Intelligence</span> <CtaChevrons />
                   </Link>
                 </div>
@@ -102,116 +97,38 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Navigator */}
+        {/* Talk to Argus CTA */}
         <section className="py-24 scroll-reveal">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-mono">&gt;_ Interactive Tool</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Project Intelligence Navigator</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Discover which AI platform is right for your business in under two minutes.</p>
-            </div>
-            <ProjectNavigator />
-          </div>
-        </section>
-
-        {/* How the Logic Works */}
-        <section className="py-24 scroll-reveal">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3 font-mono">&gt;_ How It Works</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Two Engines, One System</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Decision platforms qualify visitors on your site. The Intelligence Layer discovers opportunities across the internet. Together, they drive qualified leads.</p>
-            </div>
-
-            {/* Decision Platform Path */}
-            <div className="mb-6">
-              <p className="text-[10px] font-mono text-primary/60 uppercase tracking-widest text-center mb-3">Decision Platform</p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                <div className="glass-terminal rounded-xl p-5 text-center w-full sm:w-48 relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <Users size={24} className="text-primary mx-auto mb-2" />
-                  <p className="text-xs font-semibold text-foreground font-mono">User Input</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Guided questions</p>
-                </div>
-                <ArrowRight size={20} className="text-primary shrink-0 rotate-90 sm:rotate-0" />
-                <div className="glass-terminal rounded-xl p-6 text-center w-full sm:w-56 border-primary/30 border relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <Cpu size={28} className="text-primary mx-auto mb-2" />
-                  <p className="text-sm font-bold text-gradient font-mono">AI Analysis</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Qualifies & routes</p>
-                </div>
-                <ArrowRight size={20} className="text-accent shrink-0 rotate-90 sm:rotate-0" />
-                <div className="glass-terminal rounded-xl p-5 text-center w-full sm:w-48 relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <FileCheck size={24} className="text-accent mx-auto mb-2" />
-                  <p className="text-xs font-semibold text-foreground font-mono">Qualified Lead</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Intelligence report</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Intelligence Layer Path */}
-            <div>
-              <p className="text-[10px] font-mono text-secondary/60 uppercase tracking-widest text-center mb-3">Intelligence Layer</p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-                <div className="glass-terminal rounded-xl p-5 text-center w-full sm:w-48 relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <Radar size={24} className="text-secondary mx-auto mb-2" />
-                  <p className="text-xs font-semibold text-foreground font-mono">Signal Detection</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Across the internet</p>
-                </div>
-                <ArrowRight size={20} className="text-secondary shrink-0 rotate-90 sm:rotate-0" />
-                <div className="glass-terminal rounded-xl p-6 text-center w-full sm:w-56 border-secondary/30 border relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <Radar size={28} className="text-secondary mx-auto mb-2" />
-                  <p className="text-sm font-bold text-gradient font-mono">Intelligence Engine</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Discovers & engages</p>
-                </div>
-                <ArrowRight size={20} className="text-accent shrink-0 rotate-90 sm:rotate-0" />
-                <div className="glass-terminal rounded-xl p-5 text-center w-full sm:w-48 relative overflow-hidden">
-                  <div className="tilt-gradient-line" />
-                  <FileCheck size={24} className="text-accent mx-auto mb-2" />
-                  <p className="text-xs font-semibold text-foreground font-mono">New Opportunity</p>
-                  <p className="text-[10px] text-muted-foreground mt-1">Qualified & routed</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ROI Calculator */}
-        <section className="py-24 scroll-reveal">
-          <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-mono">&gt;_ Calculate Your ROI</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">See Your Projected Savings</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Estimate the additional revenue an AI decision platform can generate for your business.</p>
-            </div>
-            <SavingsCalculator />
-          </div>
-        </section>
-
-
-        {/* Final CTA */}
-        <section className="py-24 scroll-reveal">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="glass-terminal rounded-2xl p-10 sm:p-16 text-center relative overflow-hidden" style={{ background: "linear-gradient(135deg, hsl(217 91% 60% / 0.1), hsl(263 70% 50% / 0.1), hsl(186 100% 42% / 0.08))" }}>
+            <div className="glass-terminal rounded-2xl p-10 lg:p-16 text-center relative overflow-hidden">
               <div className="tilt-gradient-line" />
               <div className="absolute inset-0 animate-scanline pointer-events-none" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground relative z-10">Ready to Build Your AI Platform?</h2>
-              <p className="text-muted-foreground mt-4 max-w-lg mx-auto relative z-10">Let's discuss how an intelligent decision platform can transform your client acquisition.</p>
-              <Link
-                href="/contact"
-                className="btn-cta relative z-10 mt-8"
-              >
-                <span>&gt;_ Start a Project</span> <CtaChevrons />
-              </Link>
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground mb-6">
+                  <MessageSquare size={12} className="text-accent" />
+                  Intelligent Client Acquisition — Live
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                  Ready to See What <span className="text-gradient">Argus</span> Can Do?
+                </h2>
+                <p className="text-muted-foreground max-w-xl mx-auto text-sm leading-relaxed mb-8">
+                  Argus isn't a chatbot. It's an AI system that qualifies your business, understands your market, 
+                  and builds a custom proposal — in real time.
+                </p>
+                <button
+                  onClick={() => {
+                    const argusBtn = document.querySelector('[data-argus-trigger]') as HTMLButtonElement;
+                    if (argusBtn) argusBtn.click();
+                  }}
+                  className="btn-cta"
+                >
+                  <span>&gt;_ Talk to Argus</span> <CtaChevrons />
+                </button>
+              </div>
             </div>
           </div>
         </section>
       </div>
     </>
   );
-};
-
-export default Index;
+}

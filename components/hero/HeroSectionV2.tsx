@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRef, useState, useCallback } from "react";
 import MatrixRain from "./MatrixRain";
 import AudioVisualizer from "./AudioVisualizer";
@@ -74,7 +73,6 @@ const HeroSectionV2 = () => {
                 : "0 0 10px hsla(271, 81%, 56%, 0.08)",
             }}
           >
-            {/* Gradient border glow overlay */}
             <div
               className="absolute inset-0 rounded-full pointer-events-none"
               style={{
@@ -83,13 +81,10 @@ const HeroSectionV2 = () => {
                 transition: "opacity 400ms ease",
               }}
             />
-
-            {/* Play/Pause button */}
             <button
               onClick={toggleAudio}
               className="relative z-10 shrink-0 flex items-center gap-2.5 px-5 h-full text-xs font-mono font-semibold tracking-wide text-muted-foreground hover:text-foreground transition-colors duration-200 whitespace-nowrap"
             >
-              {/* Animated mini waveform icon */}
               <span className="flex items-center gap-[2px] h-3.5">
                 {[0, 1, 2].map((i) => (
                   <span
@@ -97,9 +92,7 @@ const HeroSectionV2 = () => {
                     className="inline-block w-[2px] rounded-full bg-primary"
                     style={{
                       height: isPlaying ? "100%" : "40%",
-                      animation: isPlaying
-                        ? `pulse ${0.4 + i * 0.15}s ease-in-out infinite alternate`
-                        : "none",
+                      animation: isPlaying ? `pulse ${0.4 + i * 0.15}s ease-in-out infinite alternate` : "none",
                       transition: "height 300ms ease",
                       opacity: isPlaying ? 1 : 0.6,
                     }}
@@ -107,17 +100,13 @@ const HeroSectionV2 = () => {
                 ))}
               </span>
               <span>{isPlaying ? "Pause" : "Listen"}</span>
-
-              {/* Play/pause indicator with pulsing energy ring */}
               <span className="relative ml-1 flex items-center justify-center w-5 h-5">
                 {!isPlaying && (
                   <>
                     <style>{`@keyframes energy-ping { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }`}</style>
                     <span
                       className="absolute inset-0 rounded-full border border-primary/40"
-                      style={{
-                        animation: "energy-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite",
-                      }}
+                      style={{ animation: "energy-ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite" }}
                     />
                   </>
                 )}
@@ -129,8 +118,6 @@ const HeroSectionV2 = () => {
                 </span>
               </span>
             </button>
-
-            {/* Visualizer — slides in from right */}
             <div
               className="flex-1 flex items-center justify-center overflow-hidden"
               style={{
@@ -148,16 +135,24 @@ const HeroSectionV2 = () => {
           </div>
         </div>
 
+        {/* CTAs */}
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/quote" className="btn-cta">
-            <span>Get a Quote</span> <CtaChevrons />
-          </Link>
-          <Link
+          <button
+            data-argus-trigger
+            onClick={() => {
+              const argusBtn = document.querySelector('[data-argus-open]') as HTMLButtonElement;
+              if (argusBtn) argusBtn.click();
+            }}
+            className="btn-cta"
+          >
+            <span>&gt;_ Talk to Argus</span> <CtaChevrons />
+          </button>
+          <a
             href="/tools/audit"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded-lg border border-border/30 text-foreground hover:bg-accent/10 transition-all duration-300"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded-lg border border-border/30 text-foreground hover:bg-accent/10 transition-all duration-300 font-mono"
           >
             Complimentary Site Audit — Limited Availability
-          </Link>
+          </a>
         </div>
       </div>
     </section>
