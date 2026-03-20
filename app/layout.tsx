@@ -3,36 +3,35 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ArgusChat from "@/components/argus/ArgusChat";
+import ScrollToTop from "@/components/layout/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mitryxa | AI Decision Platforms",
-  description: "Mitryxa builds AI decision platforms and digital intelligence systems that educate customers, discover opportunities, and generate highly qualified leads for professional service businesses.",
-  metadataBase: new URL("https://mitryxa.com"),
+  title: "Mitryxa — AI Decision Platforms & Digital Intelligence",
+  description: "Mitryxa builds AI-powered decision platforms and digital intelligence systems for growth-focused businesses.",
+  keywords: ["AI agency", "digital intelligence", "web design", "AI platforms", "Los Angeles"],
   openGraph: {
-    title: "Mitryxa | AI Decision Platforms",
-    description: "Websites that think before your sales team has to.",
+    title: "Mitryxa — AI Decision Platforms",
+    description: "AI-powered decision platforms for growth-focused businesses.",
     url: "https://mitryxa.com",
     siteName: "Mitryxa",
     type: "website",
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-      </head>
       <body className={inter.className}>
+        <ScrollToTop />
         <Navbar />
-        <main className="min-h-screen">{children}</main>
+        <main>{children}</main>
         <Footer />
-        <ArgusChat floatingBubble />
       </body>
     </html>
   );
