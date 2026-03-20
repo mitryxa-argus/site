@@ -1200,7 +1200,7 @@ const AuditInner = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link
-                      href="/contact"
+                      href="/argus"
                       className="btn-cta"
                     >
                       <span>Start a Project</span> <CtaChevrons />

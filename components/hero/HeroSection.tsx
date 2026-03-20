@@ -36,7 +36,7 @@ const HeroSection = () => (
       </p>
 
       <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-        <Link href="/contact" className="btn-cta">
+        <Link href="/argus" className="btn-cta">
           <span>Start a Project</span> <CtaChevrons />
         </Link>
         <Link

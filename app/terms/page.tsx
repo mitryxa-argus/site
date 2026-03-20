@@ -146,7 +146,7 @@ const TermsOfService = () => {
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-secondary" />
                   <p className="font-mono text-sm"><strong>Mitryxa Labs LLC</strong></p>
                   <p className="text-muted-foreground text-sm mt-1">Los Angeles, California</p>
-                  <p className="text-muted-foreground text-sm mt-1">Contact us via our <a href="/contact" className="text-primary hover:text-primary/80 transition-colors">contact form</a>.</p>
+                  <p className="text-muted-foreground text-sm mt-1">Contact us via our <a href="/argus" className="text-primary hover:text-primary/80 transition-colors">Talk to Argus</a>.</p>
                 </div>
               </section>
             </div>

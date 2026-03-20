@@ -276,7 +276,7 @@ const Platforms = () => {
           <div className="container mx-auto px-4 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-foreground">Need a Custom Platform?</h2>
             <p className="text-muted-foreground mt-3 max-w-md mx-auto">We build decision platforms tailored to your industry and business model.</p>
-            <Link href="/contact" className="btn-cta mt-8">
+            <Link href="/argus" className="btn-cta mt-8">
               <span>&gt;_ Start a Project</span> <CtaChevrons />
             </Link>
           </div>

@@ -112,7 +112,7 @@ const PrivacyPolicy = () => {
                   <li><strong>Opt-Out:</strong> Unsubscribe from marketing communications at any time</li>
                   <li><strong>Restriction:</strong> Request that we restrict processing of your data under certain circumstances</li>
                 </ul>
-                <p className="mt-3">To exercise any of these rights, please contact us through our <a href="/contact" className="text-primary hover:text-primary/80 transition-colors">contact form</a>.</p>
+                <p className="mt-3">To exercise any of these rights, please contact us through our <a href="/argus" className="text-primary hover:text-primary/80 transition-colors">Talk to Argus</a>.</p>
               </section>
 
               <section>
@@ -142,7 +142,7 @@ const PrivacyPolicy = () => {
                   <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-primary to-secondary" />
                   <p className="font-mono text-sm"><strong>Mitryxa Labs LLC</strong></p>
                   <p className="text-muted-foreground text-sm mt-1">Los Angeles, California</p>
-                  <p className="text-muted-foreground text-sm mt-1">Contact us via our <a href="/contact" className="text-primary hover:text-primary/80 transition-colors">contact form</a>.</p>
+                  <p className="text-muted-foreground text-sm mt-1">Contact us via our <a href="/argus" className="text-primary hover:text-primary/80 transition-colors">Talk to Argus</a>.</p>
                 </div>
               </section>
             </div>

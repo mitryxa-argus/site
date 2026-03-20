@@ -7,8 +7,6 @@ import HeroSectionV2 from "@/components/hero/HeroSectionV2";
 import SEOHead from "@/components/seo/SEOHead";
 import JsonLd, { organizationSchema } from "@/components/seo/JsonLd";
 import PlatformsCarousel from "@/components/platforms/PlatformsCarousel";
-import ProjectNavigator from "@/components/navigator/ProjectNavigator";
-import SavingsCalculator from "@/components/calculator/SavingsCalculator";
 import { ArrowRight, Users, Cpu, FileCheck, Radar } from "lucide-react";
 import CtaChevrons from "@/components/ui/CtaChevrons";
 import NetworkHubViz from "@/components/intelligence/NetworkHubViz";
@@ -103,18 +101,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── Project Intelligence Navigator ── */}
-        <section className="py-24 scroll-reveal">
-          <div className="container mx-auto px-4 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-mono">&gt;_ Interactive Tool</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">Project Intelligence Navigator</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Discover which AI platform is right for your business in under two minutes.</p>
-            </div>
-            <ProjectNavigator />
-          </div>
-        </section>
-
         {/* ── Two Engines, One System ── */}
         <section className="py-24 scroll-reveal">
           <div className="container mx-auto px-4 lg:px-8">
@@ -182,19 +168,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ── ROI Calculator ── */}
-        <section className="py-24 scroll-reveal">
-          <div className="container mx-auto px-4 lg:px-8 max-w-3xl">
-            <div className="text-center mb-12">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent mb-3 font-mono">&gt;_ Calculate Your ROI</p>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground">See Your Projected Savings</h2>
-              <p className="text-muted-foreground mt-4 max-w-xl mx-auto">Estimate the additional revenue an AI decision platform can generate for your business.</p>
-            </div>
-            <SavingsCalculator />
-          </div>
-        </section>
-
-        {/* ── Final CTA ── */}
+        {/* ── Final CTA → Argus ── */}
         <section className="py-24 scroll-reveal">
           <div className="container mx-auto px-4 lg:px-8">
             <div
@@ -203,12 +177,13 @@ export default function Home() {
             >
               <div className="tilt-gradient-line" />
               <div className="absolute inset-0 animate-scanline pointer-events-none" />
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4 font-mono relative z-10">&gt;_ Your AI Partner</p>
               <h2 className="text-3xl sm:text-4xl font-bold text-foreground relative z-10">Ready to Build Your AI Platform?</h2>
               <p className="text-muted-foreground mt-4 max-w-lg mx-auto relative z-10">
-                Let's discuss how an intelligent decision platform can transform your client acquisition.
+                Skip the forms. Talk directly to Argus — Mitryxa&apos;s AI partner. Ask anything, get a real plan, start a project.
               </p>
-              <Link href="/contact" className="btn-cta relative z-10 mt-8 inline-flex">
-                <span>&gt;_ Start a Project</span> <CtaChevrons />
+              <Link href="/argus" className="btn-cta relative z-10 mt-8 inline-flex">
+                <span>&gt;_ Talk to Argus</span> <CtaChevrons />
               </Link>
             </div>
           </div>

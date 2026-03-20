@@ -350,7 +350,7 @@ const About = () => {
             </div>
             <p className="text-sm text-muted-foreground mt-2 font-mono">Mitryxa Labs LLC</p>
             <Link
-              href="/contact"
+              href="/argus"
               className="btn-cta mt-8"
             >
               <span>&gt;_ Get in Touch</span> <CtaChevrons />

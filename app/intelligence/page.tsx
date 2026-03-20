@@ -181,7 +181,7 @@ const Intelligence = () => {
                   Every day potential clients discuss problems, ask questions, and search for solutions across the internet. Most businesses never see these moments. The Mitryxa Digital Intelligence Layer helps organizations identify those opportunities, respond intelligently, guide potential customers toward their services, and ensure that no inquiry is ignored.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-10">
-                  <Link href="/contact" className="btn-cta">
+                  <Link href="/argus" className="btn-cta">
                     <span>&gt;_ Schedule a Strategy Session</span> <CtaChevrons />
                   </Link>
                   <a
@@ -408,7 +408,7 @@ const Intelligence = () => {
             <p className="text-muted-foreground mt-4 max-w-xl mx-auto">
               Discover how the Mitryxa Digital Intelligence Layer can help your business identify opportunities, respond intelligently, and convert interest into meaningful growth.
             </p>
-            <Link href="/contact" className="btn-cta mt-8">
+            <Link href="/argus" className="btn-cta mt-8">
               <span>&gt;_ Schedule a Strategy Session</span> <CtaChevrons />
             </Link>
           </div>

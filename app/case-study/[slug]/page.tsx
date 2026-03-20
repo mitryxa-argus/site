@@ -152,7 +152,7 @@ const CaseStudy = () => {
               We build custom decision platforms tailored to your industry and business model.
             </p>
             <Link
-              href="/contact"
+              href="/argus"
               className="btn-cta mt-8"
             >
               <span>&gt;_ Start a Project</span> <CtaChevrons />
