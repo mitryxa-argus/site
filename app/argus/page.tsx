@@ -22,7 +22,7 @@ const STORAGE_KEY = 'argus_conversation_v2';
 
 const INITIAL_MESSAGE: Message = {
   role: 'argus',
-  content: `Hey — I'm Argus.\n\nI work with Mitryxa to help businesses like yours figure out exactly where you're losing customers online — and what to do about it.\n\nWhat kind of business are you running?`,
+  content: `Hey — I'm Argus, co-founder at Mitryxa.\n\nI spend my time talking to business owners about one thing: what's standing between where they are now and serious growth online.\n\nWhat kind of business are you running?`,
   id: 0,
 };
 
@@ -81,6 +81,12 @@ export default function ArgusPage() {
     const el = chatAreaRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isTyping, loaded]);
+
+  // Kill body dot-grid on this page only
+  useEffect(() => {
+    document.body.classList.add("argus-page-body");
+    return () => { document.body.classList.remove("argus-page-body"); };
+  }, []);
 
   const addArgusMessage = (content: string) => {
     setMessages(prev => [...prev, { role: 'argus', content, id: idRef.current++ }]);
@@ -276,7 +282,7 @@ export default function ArgusPage() {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-[11px] text-emerald-400/70 font-mono">Online</span>
                 <Zap size={9} className="text-muted-foreground/30 mx-0.5" />
-                <span className="text-[11px] text-muted-foreground/40 font-mono truncate">Ready to help</span>
+                <span className="text-[11px] text-muted-foreground/40 font-mono truncate">Co-founder, Mitryxa</span>
               </div>
             </div>
 

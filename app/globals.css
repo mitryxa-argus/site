@@ -292,3 +292,9 @@
   to { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-in { animation: fade-in 0.2s ease forwards; }
+
+/* Argus page — kill body dot grid */
+body.argus-page-body {
+  background-image: none !important;
+  background-size: unset !important;
+}
