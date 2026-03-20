@@ -82,10 +82,16 @@ export default function ArgusPage() {
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, isTyping, loaded]);
 
-  // Kill body dot-grid on this page only
+  // Hide footer, navbar bottom border, kill dot-grid — Argus is a standalone experience
   useEffect(() => {
-    document.body.classList.add("argus-page-body");
-    return () => { document.body.classList.remove("argus-page-body"); };
+    document.body.classList.add("argus-route");
+    // Directly hide footer element
+    const footer = document.querySelector('footer');
+    if (footer) footer.style.display = 'none';
+    return () => {
+      document.body.classList.remove("argus-route");
+      if (footer) footer.style.display = '';
+    };
   }, []);
 
   const addArgusMessage = (content: string) => {
