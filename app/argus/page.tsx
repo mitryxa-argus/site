@@ -18,7 +18,7 @@ const TypingDots = () => (
 
 type Message = { role: 'argus' | 'user'; content: string; id: number };
 
-const STORAGE_KEY = 'argus_conversation_v2';
+const STORAGE_KEY = 'argus_conversation_v3';
 
 const INITIAL_MESSAGE: Message = {
   role: 'argus',
@@ -240,7 +240,10 @@ export default function ArgusPage() {
 
       <div
         className="argus-page"
-        style={{ background: 'hsl(220 20% 6%)' }}
+        style={{
+          background: 'hsl(220 20% 6%)',
+          backgroundImage: 'none',
+        }}
       >
         {/* ── HEADER ── */}
         <div className="relative z-10 shrink-0 pt-16 border-b border-white/[0.05]"

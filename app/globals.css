@@ -298,3 +298,12 @@ body.argus-page-body {
   background-image: none !important;
   background-size: unset !important;
 }
+/* Belt + suspenders: target the fixed wrapper directly */
+.argus-page {
+  background-image: none !important;
+  background-size: unset !important;
+}
+/* Cover the body behind the fixed page */
+body:has(.argus-page) {
+  background-image: none !important;
+}
