@@ -54,13 +54,11 @@ const NavTerminal = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Random glitch bursts
   useEffect(() => {
-    const scheduleGlitch = () => {
+    const scheduleGlitch = (): ReturnType<typeof setTimeout> => {
       const delay = 2000 + Math.random() * 5000;
       return setTimeout(() => {
         setGlitching(true);
-        // Rapid glitch text cycling
         let flickerCount = 0;
         const maxFlickers = 4 + Math.floor(Math.random() * 6);
         const flickerInterval = setInterval(() => {
@@ -117,9 +115,9 @@ const links = [
   { to: "/intelligence", label: "Intelligence" },
   { to: "/use-cases", label: "Use Cases" },
   { to: "/technology", label: "Technology" },
-  { to: "/tools", label: "Tools" },
-  { to: "/quote", label: "Get a Quote" },
+  { to: "/argus", label: "Talk to Argus" },
 ];
+
 const PronunciationBadge = () => {
   const [showDef, setShowDef] = useState(false);
   const badgeRef = useRef<HTMLDivElement>(null);
@@ -152,50 +150,42 @@ const PronunciationBadge = () => {
 
       {showDef && (
         <>
-          {/* Backdrop for mobile */}
           <div className="fixed inset-0 z-40 bg-background/60 backdrop-blur-sm sm:hidden" onClick={() => setShowDef(false)} />
-
-          {/* Popover: centered on mobile, anchored on desktop */}
           <div className="fixed sm:absolute z-50 inset-0 sm:inset-auto flex items-center justify-center sm:block sm:top-full sm:left-0 sm:mt-2 pointer-events-none">
             <div className="w-[85vw] sm:w-72 pointer-events-auto animate-fade-in">
               <div className="rounded-xl p-4 border border-primary/10 shadow-2xl shadow-primary/5 relative overflow-hidden backdrop-blur-2xl" style={{ background: 'hsl(220 20% 8% / 0.95)' }}>
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-primary via-secondary to-accent" />
-
-              <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-lg font-bold text-foreground font-mono tracking-wide">Mitryxa</span>
-                <span className="text-[10px] text-muted-foreground/50 italic">proper noun</span>
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-primary via-secondary to-accent" />
+                <div className="flex items-baseline gap-2 mb-1">
+                  <span className="text-lg font-bold text-foreground font-mono tracking-wide">Mitryxa</span>
+                  <span className="text-[10px] text-muted-foreground/50 italic">proper noun</span>
+                </div>
+                <div className="flex items-center gap-1.5 mb-3">
+                  <span className="text-xs font-mono text-muted-foreground">
+                    / <span className="text-primary">mih</span>-<span className="text-secondary">TRIKS</span>-<span className="text-accent">uh</span> /
+                  </span>
+                  <button
+                    onClick={() => new Audio("/mitryxa-pronunciation.mp3").play()}
+                    className="text-muted-foreground/40 hover:text-primary transition-colors cursor-pointer"
+                    aria-label="Listen to pronunciation"
+                  >
+                    <Volume2 size={10} />
+                  </button>
+                </div>
+                <div className="w-full h-px bg-primary/10 mb-3" />
+                <div className="space-y-2">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    <span className="text-foreground/70 font-medium">1.</span> A technology studio that builds AI-powered decision platforms for professional service businesses.
+                  </p>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    <span className="text-foreground/70 font-medium">2.</span> Derived from "<span className="text-foreground/80 font-mono">matrix</span>" — a framework where complex systems connect and interact.
+                  </p>
+                </div>
+                <div className="mt-3 pt-2 border-t border-primary/5">
+                  <p className="text-[10px] text-muted-foreground/40 font-mono">
+                    origin: <span className="text-primary/40">M</span>atrix + <span className="text-secondary/40">I</span>ntelligence + <span className="text-accent/40">A</span>rchitecture
+                  </p>
+                </div>
               </div>
-
-              <div className="flex items-center gap-1.5 mb-3">
-                <span className="text-xs font-mono text-muted-foreground">
-                  / <span className="text-primary">mih</span>-<span className="text-secondary">TRIKS</span>-<span className="text-accent">uh</span> /
-                </span>
-                <button
-                  onClick={() => new Audio("/mitryxa-pronunciation.mp3").play()}
-                  className="text-muted-foreground/40 hover:text-primary transition-colors cursor-pointer"
-                  aria-label="Listen to pronunciation"
-                >
-                  <Volume2 size={10} />
-                </button>
-              </div>
-
-              <div className="w-full h-px bg-primary/10 mb-3" />
-
-              <div className="space-y-2">
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  <span className="text-foreground/70 font-medium">1.</span> A technology studio that builds AI-powered decision platforms for professional service businesses.
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  <span className="text-foreground/70 font-medium">2.</span> Derived from "<span className="text-foreground/80 font-mono">matrix</span>" — a framework where complex systems connect and interact.
-                </p>
-              </div>
-
-              <div className="mt-3 pt-2 border-t border-primary/5">
-                <p className="text-[10px] text-muted-foreground/40 font-mono">
-                  origin: <span className="text-primary/40">M</span>atrix + <span className="text-secondary/40">I</span>ntelligence + <span className="text-accent/40">A</span>rchitecture
-                </p>
-              </div>
-            </div>
             </div>
           </div>
         </>
@@ -203,6 +193,7 @@ const PronunciationBadge = () => {
     </div>
   );
 };
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -214,46 +205,38 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "backdrop-blur-xl" : ""
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "backdrop-blur-xl" : ""}`}
       style={{
         background: scrolled
           ? "hsl(220 20% 6% / 0.85)"
           : "linear-gradient(to bottom, hsl(220 20% 6% / 0.95), hsl(220 20% 6% / 0))",
       }}
     >
-      <div className="container mx-auto flex items-center justify-between h-16 px-4 nav:px-8">
+      <div className="container mx-auto flex items-center justify-between h-16 px-4 lg:px-8">
+        {/* Logo + pronunciation */}
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 text-foreground">
             <MitrxyaLogo />
           </Link>
-
-          {/* Pronunciation badge with dictionary popover */}
           <PronunciationBadge />
         </div>
 
-        {/* Desktop */}
+        {/* Desktop nav links — center */}
         <div className="hidden nav:flex items-center gap-1">
           {links.map((l) => (
             <Link
               key={l.to}
               href={l.to}
-              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors ${
-                l.to === "/tools"
-                  ? pathname.startsWith("/tools")
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                  : pathname === l.to
-                    ? "text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+              className={`px-3 py-2 text-sm font-medium rounded-md transition-colors font-sans ${
+                l.to === '/argus'
+                  ? 'text-primary border border-primary/20 hover:border-primary/40 hover:bg-primary/5 ml-2'
+                  : pathname === l.to || (l.to !== '/' && pathname.startsWith(l.to))
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {l.label}
@@ -261,6 +244,7 @@ const Navbar = () => {
           ))}
         </div>
 
+        {/* Desktop terminal — right */}
         <div className="hidden nav:flex items-center gap-3">
           <NavTerminal />
         </div>
@@ -282,11 +266,9 @@ const Navbar = () => {
               key={l.to}
               href={l.to}
               className={`block py-3 text-sm font-medium border-b border-white/5 ${
-                l.to === "/tools"
-                  ? pathname.startsWith("/tools")
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                  : pathname === l.to ? "text-primary" : "text-muted-foreground"
+                pathname === l.to || (l.to !== '/' && pathname.startsWith(l.to))
+                  ? 'text-primary'
+                  : 'text-muted-foreground'
               }`}
             >
               {l.label}

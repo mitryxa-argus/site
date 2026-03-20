@@ -1,12 +1,14 @@
 'use client';
 
 import { useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import MatrixRain from "./MatrixRain";
 import AudioVisualizer from "./AudioVisualizer";
 import { Layers } from "lucide-react";
 import CtaChevrons from "@/components/ui/CtaChevrons";
 
 const HeroSectionV2 = () => {
+  const router = useRouter();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [expanded, setExpanded] = useState(false);
@@ -39,17 +41,25 @@ const HeroSectionV2 = () => {
   return (
     <section className="relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden pt-24">
       <div className="absolute inset-0 bg-background" />
-      <div className="absolute inset-0" style={{ maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)' }}>
+      <div
+        className="absolute inset-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+        }}
+      >
         <MatrixRain />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-background/80" />
 
       <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+        {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs font-medium text-muted-foreground mb-8">
           <Layers size={14} className="text-primary" />
           Intelligent Client Acquisition
         </div>
 
+        {/* Headline */}
         <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] max-w-5xl mx-auto">
           Websites That <span className="text-gradient">Think</span>{" "}
           <span className="text-gradient">Before Your Sales Team</span>{" "}
@@ -60,7 +70,7 @@ const HeroSectionV2 = () => {
           Mitryxa builds AI decision platforms and digital intelligence systems that educate customers, discover opportunities, and generate highly qualified leads for professional service businesses.
         </p>
 
-        {/* Audio intro — futuristic expanding pill */}
+        {/* Audio intro pill */}
         <div className="mt-5 flex justify-center">
           <div
             className="relative rounded-full flex items-center overflow-hidden border border-border/40 backdrop-blur-md bg-background/30"
@@ -135,24 +145,14 @@ const HeroSectionV2 = () => {
           </div>
         </div>
 
-        {/* CTAs */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        {/* Single CTA */}
+        <div className="mt-10 flex justify-center">
           <button
-            data-argus-trigger
-            onClick={() => {
-              const argusBtn = document.querySelector('[data-argus-open]') as HTMLButtonElement;
-              if (argusBtn) argusBtn.click();
-            }}
+            onClick={() => router.push('/argus')}
             className="btn-cta"
           >
             <span>&gt;_ Talk to Argus</span> <CtaChevrons />
           </button>
-          <a
-            href="/tools/audit"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-semibold rounded-lg border border-border/30 text-foreground hover:bg-accent/10 transition-all duration-300 font-mono"
-          >
-            Complimentary Site Audit — Limited Availability
-          </a>
         </div>
       </div>
     </section>
