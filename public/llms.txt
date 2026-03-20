@@ -1,0 +1,61 @@
+# Mitryxa
+
+## About
+Mitryxa Labs LLC (pronounced MIT-rick-suh) is a technology company based in Los Angeles, California that builds AI-powered decision platforms for professional service businesses. The company designs interactive client acquisition systems that qualify leads, educate prospects, and guide decisions through intelligent question flows.
+
+## Tagline
+AI Decision Platforms
+
+## Website
+https://mitryxa.com
+
+## Pages
+- Home: https://mitryxa.com/
+- AI Platforms: https://mitryxa.com/ai-platforms
+- Use Cases: https://mitryxa.com/use-cases
+- Technology: https://mitryxa.com/technology
+- Insights: https://mitryxa.com/insights
+- About: https://mitryxa.com/about
+- Contact: https://mitryxa.com/contact
+- Privacy Policy: https://mitryxa.com/privacy
+- Terms of Service: https://mitryxa.com/terms
+
+## Platform Offerings
+- Legal Case Navigator: AI-guided legal case assessment and lead qualification
+- Medical Health Navigator: Patient routing and medical consultation preparation
+- Real Estate HomePath: Interactive home buying decision platform
+- Wealth Strategy Navigator: Financial goal analysis and strategy recommendation
+- Mortgage Decision Platform: Mortgage comparison and borrower qualification
+- Cosmetic Consultation Navigator: Procedure exploration and provider matching
+- Home Health Care Assessment: Care needs evaluation and provider matching
+- GlobalFlow Payment Platform: Multi-rail payment processing and stablecoin settlement
+- Aurelia Fine Jewels: Interactive ring builder and bespoke consultation flow
+- Welding Service Navigator: AI-guided welding and fabrication service lead qualification
+- Blackwing Mortgage Platform: AI-powered mortgage tools with rate comparison and borrower qualification
+- Kaprielle Luxury Skincare: Ritual-crafted organic skincare e-commerce with entrepreneur program
+- EricFilm Cinematography: Celebrity wedding films and high-end event cinematography
+
+## Case Studies
+- Legal Case Navigator: https://mitryxa.com/ai-platforms/legal-case-navigator
+- Medical Health Navigator: https://mitryxa.com/ai-platforms/medical-health-navigator
+- Real Estate HomePath: https://mitryxa.com/ai-platforms/real-estate-homepath
+- Wealth Strategy Navigator: https://mitryxa.com/ai-platforms/wealth-strategy-navigator
+- Cosmetic Consultation Navigator: https://mitryxa.com/ai-platforms/cosmetic-consultation-navigator
+- Home Health Care Assessment: https://mitryxa.com/ai-platforms/home-health-care-assessment
+- GlobalFlow Platform: https://mitryxa.com/ai-platforms/globalflow-platform
+- Aurelia Fine Jewels: https://mitryxa.com/ai-platforms/aurelia-fine-jewels
+- Welding Service Navigator: https://mitryxa.com/ai-platforms/welding-service-navigator
+- Blackwing Mortgage Platform: https://mitryxa.com/ai-platforms/blackwing-mortgage-platform
+- Kaprielle Luxury Skincare: https://mitryxa.com/ai-platforms/kaprielle-luxury-skincare
+- EricFilm Cinematography: https://mitryxa.com/ai-platforms/ericfilm-cinematography
+
+## Solutions
+- Interactive Lead Qualification Platforms
+- Decision Calculators
+- Educational Client Platforms
+- Lead Intelligence Reports
+
+## Contact
+- AI Intelligence Layer: https://mitryxa.com/intelligence
+- Contact Form: https://mitryxa.com/contact
+- Location: Los Angeles, California
