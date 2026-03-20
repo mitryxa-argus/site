@@ -25,7 +25,7 @@ const PlatformCard = ({
   const borderPos = 50 + tiltY * 40;
   return (
     <Link
-      href={`/ai-platforms/${caseStudies.find(cs => cs.platformId === p.id)?.slug || p.id}`}
+      href={`/case-study/${caseStudies.find(cs => cs.platformId === p.id)?.slug || p.id}`}
       onClick={(e) => { if (isDragging) e.preventDefault(); }}
       className={`glass-terminal rounded-lg p-5 w-[260px] shrink-0 relative overflow-hidden group hover:border-primary/20 transition-all duration-300 ${isGlitching ? "card-glitch-jitter" : ""}`}
       style={{ '--tilt-x': tiltX, '--tilt-y': tiltY } as React.CSSProperties}

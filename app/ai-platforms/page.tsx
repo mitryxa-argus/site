@@ -206,7 +206,7 @@ const Platforms = () => {
                       {cs && (
                         <div className="flex items-center gap-3 mt-3 pt-3 border-t border-border">
                           <Link
-                            href={`/ai-platforms/${cs.slug}`}
+                            href={`/case-study/${cs.slug}`}
                             className="inline-flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors font-semibold font-mono"
                           >
                             Case Study <ArrowRight size={12} />
