@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useCountUp } from "@/hooks/useCountUp";
 import HeroSectionV2 from "@/components/hero/HeroSectionV2";
 import SEOHead from "@/components/seo/SEOHead";
@@ -30,8 +29,6 @@ const StatCard = ({ label, value, suffix, prefix = "" }: { label: string; value:
 };
 
 export default function Home() {
-  const sectionRef = useScrollReveal<HTMLDivElement>();
-
   return (
     <>
       <SEOHead
@@ -43,10 +40,10 @@ export default function Home() {
 
       <HeroSectionV2 />
 
-      <div ref={sectionRef}>
+      <div>
 
         {/* ── AI Decision Platforms by Industry ── */}
-        <section className="py-24 scroll-reveal">
+        <section className="py-24">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-center mb-8">
               <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3 font-mono">&gt;_ Platform Command</p>
@@ -58,7 +55,7 @@ export default function Home() {
         </section>
 
         {/* ── Intelligence Layer Promo ── */}
-        <section className="py-20 scroll-reveal">
+        <section className="py-20">
           <div className="container mx-auto px-4 lg:px-8">
             <div
               className="glass-terminal rounded-2xl relative overflow-hidden"
@@ -91,7 +88,7 @@ export default function Home() {
         </section>
 
         {/* ── Stats ── */}
-        <section className="py-24 scroll-reveal">
+        <section className="py-24">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               {stats.map((s) => (
@@ -102,7 +99,7 @@ export default function Home() {
         </section>
 
         {/* ── Two Engines, One System ── */}
-        <section className="py-24 scroll-reveal">
+        <section className="py-24">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-center mb-12">
               <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3 font-mono">&gt;_ How It Works</p>
@@ -169,7 +166,7 @@ export default function Home() {
         </section>
 
         {/* ── Final CTA → Argus ── */}
-        <section className="py-24 scroll-reveal">
+        <section className="py-24">
           <div className="container mx-auto px-4 lg:px-8">
             <div
               className="glass-terminal rounded-2xl p-10 sm:p-16 text-center relative overflow-hidden"

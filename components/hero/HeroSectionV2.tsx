@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import MatrixRain from "./MatrixRain";
 import AudioVisualizer from "./AudioVisualizer";
@@ -13,6 +13,16 @@ const HeroSectionV2 = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [audioReady, setAudioReady] = useState(false);
+
+  // Stop audio when user navigates away
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+    };
+  }, []);
 
   const toggleAudio = useCallback(() => {
     if (!audioRef.current) {
